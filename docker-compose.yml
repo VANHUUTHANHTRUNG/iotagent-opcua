@@ -27,20 +27,19 @@ services:
     volumes:
       - ./AGECONF:/opt/iotagent-opcua/conf
       - ./certificates:/opt/iotagent-opcua/certificates
-    command: npm start
+    command: node index.js
     environment:
       - IOTA_REGISTRY_TYPE=mongodb #Whether to hold IoT device info in memory or in a database
       - IOTA_LOG_LEVEL=DEBUG # The log level of the IoT Agent
       - IOTA_MONGO_HOST=iot_mongo # The host name of MongoDB
       - IOTA_MONGO_DB=iotagent_opcua # The name of the database used in mongoDB
-      - IOTA_CB_NGSI_VERSION=ld # use NGSI-LD when sending updates for active attributes
-      - IOTA_JSON_LD_CONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.3.jsonld
+      - IOTA_CB_NGSI_VERSION=v2 # use NGSI-v2 when sending updates for active attributes
       - IOTA_FALLBACK_TENANT=opcua_car
       - IOTA_RELAX_TEMPLATE_VALIDATION=true
 
   iotmongo:
     hostname: iot_mongo
-    image: mongo:4.2
+    image: mongo:4.4
     networks:
       - iotnet
     volumes:
@@ -51,7 +50,7 @@ services:
 
   orion:
     hostname: orion
-    image: fiware/orion:latest
+    image: fiware/orion:latest # Change to orion-ld if IOTA_CB_NGSI_VERSION=ld
     networks:
       - hostnet
       - ocbnet
@@ -59,11 +58,11 @@ services:
       - "1026:1026"
     depends_on:
       - orion_mongo
-    command: -statCounters -dbhost orion_mongo -logForHumans -logLevel INFO -t 255
+    command: -statCounters -dbhost orion_mongo -logForHumans -logLevel DEBUG -t 255
 
   orion_mongo:
     hostname: orion_mongo
-    image: mongo:4.2
+    image: mongo:4.4
     networks:
       - ocbnet
     ports:
@@ -71,7 +70,7 @@ services:
     volumes:
       - orion_mongo_data:/data/db
       - orion_mongo_conf:/data/configdb
-    command: --nojournal
+    command: --nojournal # add a buffer for changes made in mongodb with the cost of doubling the memory
 
 volumes:
   iot_mongo_data:
