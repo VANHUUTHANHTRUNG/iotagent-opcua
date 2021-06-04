@@ -1,134 +1,1901 @@
 {
-	"logLevel": "INFO",
-	"multiCore": false,
-	"relaxTemplateValidation": true,
-	"contextBroker": {
-		"host": "orion",
-		"port": 1026,
-		"ngsiVersion":"v1",
-        "service" : "opcua_car",
-        "subservice" : "/demo"
-	},
-	"server": {
-		"port": 4001,
-		"baseRoot": "/"
-	},
-	"deviceRegistry": {
-		"type": "memory"
-	},
-	"mongodb": {
-		"host": "iotmongo",
-		"port": "27017",
-		"db": "iotagent",
-		"retries": 5,
-		"retryTime": 5
-	},
-	"types": {
-		"Device": {
-			"service": "opcua_car",
-			"subservice": "/demo",
-			"active": [{
-				"name": "EngineBrake",
-				"type": "Number"
-			}, {
-				"name": "Acceleration",
-				"type": "Number"
-			}, {
-				"name": "EngineStopped",
-				"type": "Boolean"
-			}, {
-				"name": "Engine_Temperature",
-				"type": "Number"
-			}, {
-				"name": "Engine_Oxigen",
-				"type": "Number"
-			}],
-			"lazy": [{
-				"name": "Speed",
-				"type": "Number"
-			}],
-			"commands": [{
-				"name": "Error",
-				"type": "command"
-			}, {
-				"name": "Stop",
-				"type": "command"
-			}, {
-				"name": "Accelerate",
-				"type": "command"
-			}]
-		}
-	},
-	"browseServerOptions": null,
-	"service": "opcua_car",
-	"subservice": "/demo",
-	"providerUrl": "http://iotage:4001",
-	"pollingExpiration": "200000",
-	"pollingDaemonFrequency": "20000",
-	"deviceRegistrationDuration": "P1M",
-	"defaultType": null,
-	"contexts": [{
-		"id": "age01_Car",
-		"type": "Device",
-		"service": "opcua_car",
-		"subservice": "/demo",
-		"polling": false,
-		"mappings": [{
-			"ocb_id": "Error",
-			"opcua_id": "ns=3;s=Error",
-			"object_id": null,
-			"inputArguments": []
-		}, {
-			"ocb_id": "Acceleration",
-			"opcua_id": "ns=3;s=Acceleration",
-			"object_id": null,
-			"inputArguments": []
-		}, {
-			"ocb_id": "EngineStopped",
-			"opcua_id": "ns=3;s=EngineStopped",
-			"object_id": null,
-			"inputArguments": []
-		}, {
-			"ocb_id": "Engine_Temperature",
-			"opcua_id": "ns=3;s=Temperature",
-			"object_id": null,
-			"inputArguments": []
-		}, {
-			"ocb_id": "Engine_Oxigen",
-			"opcua_id": "ns=3;s=Oxigen",
-			"object_id": null,
-			"inputArguments": []
-		}]
-	}],
-	"contextSubscriptions": [{
-		"id": "age01_Car",
-		"type": "Device",
-		"mappings": [{
-			"ocb_id": "Error",
-			"opcua_id": "ns=3;s=Error",
-			"object_id": "ns=3;i=1000",
-			"inputArguments": [{
-				"dataType": 12,
-				"type": "Error Type"
-			}]
-		}, {
-			"ocb_id": "Speed",
-			"opcua_id": "ns=3;s=Speed",
-			"object_id": "ns=3;i=1000",
-			"inputArguments": []
-		}, {
-			"ocb_id": "Stop",
-			"opcua_id": "ns=3;s=Stop",
-			"object_id": "ns=3;i=1000",
-			"inputArguments": []
-		}, {
-			"ocb_id": "Accelerate",
-			"opcua_id": "ns=3;s=Accelerate",
-			"object_id": "ns=3;i=1000",
-			"inputArguments": [{
-				"dataType": 6,
-				"type": "Intensity"
-			}]
-		}]
-	}]
+  "logLevel" : "INFO",
+  "contextBroker" : {
+    "host" : "orion",
+    "port" : 1026
+  },
+  "server" : {
+    "port" : 4001,
+    "baseRoot" : "/"
+  },
+  "deviceRegistry" : {
+    "type" : "memory"
+  },
+  "mongodb" : {
+    "host" : "iotmongo",
+    "port" : "27017",
+    "db" : "iotagent",
+    "retries" : 5,
+    "retryTime" : 5
+  },
+  "types" : {
+    "5:StaticData" : {
+      "service" : "UA",
+      "subservice" : "/CarServer",
+      "active" : [ {
+        "name" : "5:AccessLevels_5:AccessLevelCurrentRead",
+        "type" : "Int32"
+      }, {
+        "name" : "5:AccessLevels_5:AccessLevelCurrentReadNotUser",
+        "type" : "Int32"
+      }, {
+        "name" : "5:AccessLevels_5:AccessLevelCurrentReadWrite",
+        "type" : "Int32"
+      }, {
+        "name" : "5:AccessLevels_5:AccessLevelCurrentWrite",
+        "type" : "Int32"
+      }, {
+        "name" : "5:AccessLevels_5:AccessLevelCurrentWriteNotUser",
+        "type" : "Int32"
+      }, {
+        "name" : "5:AnalogItemArrays_5:ByteAnalogItemArray",
+        "type" : "Byte"
+      }, {
+        "name" : "5:AnalogItemArrays_5:ByteAnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:ByteAnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:ByteAnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItemArrays_5:DoubleAnalogItemArray",
+        "type" : "Number"
+      }, {
+        "name" : "5:AnalogItemArrays_5:DoubleAnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:DoubleAnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:DoubleAnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItemArrays_5:FloatAnalogItemArray",
+        "type" : "Number"
+      }, {
+        "name" : "5:AnalogItemArrays_5:FloatAnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:FloatAnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:FloatAnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int16AnalogItemArray",
+        "type" : "Int16"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int16AnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int16AnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int16AnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int32AnalogItemArray",
+        "type" : "Int32"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int32AnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int32AnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int32AnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int64AnalogItemArray",
+        "type" : "Int64"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int64AnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int64AnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:Int64AnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItemArrays_5:SByteAnalogItemArray",
+        "type" : "SByte"
+      }, {
+        "name" : "5:AnalogItemArrays_5:SByteAnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:SByteAnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:SByteAnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt16AnalogItemArray",
+        "type" : "UInt16"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt16AnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt16AnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt16AnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt32AnalogItemArray",
+        "type" : "UInt32"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt32AnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt32AnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt32AnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt64AnalogItemArray",
+        "type" : "UInt64"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt64AnalogItemArray_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt64AnalogItemArray_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItemArrays_5:UInt64AnalogItemArray_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:ByteAnalogItem",
+        "type" : "Byte"
+      }, {
+        "name" : "5:AnalogItems_5:ByteAnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:ByteAnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:ByteAnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:DoubleAnalogItem",
+        "type" : "Number"
+      }, {
+        "name" : "5:AnalogItems_5:DoubleAnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:DoubleAnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:DoubleAnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:FloatAnalogItem",
+        "type" : "Number"
+      }, {
+        "name" : "5:AnalogItems_5:FloatAnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:FloatAnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:FloatAnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:Int16AnalogItem",
+        "type" : "Int16"
+      }, {
+        "name" : "5:AnalogItems_5:Int16AnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:Int16AnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:Int16AnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:Int32AnalogItem",
+        "type" : "Int32"
+      }, {
+        "name" : "5:AnalogItems_5:Int32AnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:Int32AnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:Int32AnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:Int64AnalogItem",
+        "type" : "Int64"
+      }, {
+        "name" : "5:AnalogItems_5:Int64AnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:Int64AnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:Int64AnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:SByteAnalogItem",
+        "type" : "SByte"
+      }, {
+        "name" : "5:AnalogItems_5:SByteAnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:SByteAnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:SByteAnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem",
+        "type" : "Int32"
+      }, {
+        "name" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem_InstrumentRange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:UInt16AnalogItem",
+        "type" : "UInt16"
+      }, {
+        "name" : "5:AnalogItems_5:UInt16AnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:UInt16AnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:UInt16AnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:UInt32AnalogItem",
+        "type" : "UInt32"
+      }, {
+        "name" : "5:AnalogItems_5:UInt32AnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:UInt32AnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:UInt32AnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:AnalogItems_5:UInt64AnalogItem",
+        "type" : "UInt64"
+      }, {
+        "name" : "5:AnalogItems_5:UInt64AnalogItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:AnalogItems_5:UInt64AnalogItem_EngineeringUnits",
+        "type" : "EUInformation"
+      }, {
+        "name" : "5:AnalogItems_5:UInt64AnalogItem_EURange",
+        "type" : "Range"
+      }, {
+        "name" : "5:DataItems_5:BooleanDataItem",
+        "type" : "Boolean"
+      }, {
+        "name" : "5:DataItems_5:BooleanDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:ByteDataItem",
+        "type" : "Byte"
+      }, {
+        "name" : "5:DataItems_5:ByteDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:ByteStringDataItem",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:ByteStringDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:DateTimeDataItem",
+        "type" : "DateTime"
+      }, {
+        "name" : "5:DataItems_5:DateTimeDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:DoubleDataItem",
+        "type" : "Number"
+      }, {
+        "name" : "5:DataItems_5:DoubleDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:FloatDataItem",
+        "type" : "Number"
+      }, {
+        "name" : "5:DataItems_5:FloatDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:GUIDDataItem",
+        "type" : "Guid"
+      }, {
+        "name" : "5:DataItems_5:GUIDDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:Int16DataItem",
+        "type" : "Int16"
+      }, {
+        "name" : "5:DataItems_5:Int16DataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:Int32DataItem",
+        "type" : "Int32"
+      }, {
+        "name" : "5:DataItems_5:Int32DataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:Int64DataItem",
+        "type" : "Int64"
+      }, {
+        "name" : "5:DataItems_5:Int64DataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:SByteDataItem",
+        "type" : "SByte"
+      }, {
+        "name" : "5:DataItems_5:SByteDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:StringDataItem",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:StringDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:UInt16DataItem",
+        "type" : "UInt16"
+      }, {
+        "name" : "5:DataItems_5:UInt16DataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:UInt32DataItem",
+        "type" : "UInt32"
+      }, {
+        "name" : "5:DataItems_5:UInt32DataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:UInt64DataItem",
+        "type" : "UInt64"
+      }, {
+        "name" : "5:DataItems_5:UInt64DataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:DataItems_5:XmlElementDataItem",
+        "type" : "XmlElement"
+      }, {
+        "name" : "5:DataItems_5:XmlElementDataItem_Definition",
+        "type" : "Text"
+      }, {
+        "name" : "5:MultiStateItems_5:MultiStateDiscreteItem",
+        "type" : "Integer"
+      }, {
+        "name" : "5:MultiStateItems_5:MultiStateDiscreteItem_EnumStrings",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "5:StaticArrayVariables_5:BooleanArray",
+        "type" : "Boolean"
+      }, {
+        "name" : "5:StaticArrayVariables_5:ByteArray",
+        "type" : "Byte"
+      }, {
+        "name" : "5:StaticArrayVariables_5:ByteStringArray",
+        "type" : "Text"
+      }, {
+        "name" : "5:StaticArrayVariables_5:DateTimeArray",
+        "type" : "DateTime"
+      }, {
+        "name" : "5:StaticArrayVariables_5:DoubleArray",
+        "type" : "Number"
+      }, {
+        "name" : "5:StaticArrayVariables_5:FloatArray",
+        "type" : "Number"
+      }, {
+        "name" : "5:StaticArrayVariables_5:GUIDArrayArray",
+        "type" : "Guid"
+      }, {
+        "name" : "5:StaticArrayVariables_5:Int16Array",
+        "type" : "Int16"
+      }, {
+        "name" : "5:StaticArrayVariables_5:Int32Array",
+        "type" : "Int32"
+      }, {
+        "name" : "5:StaticArrayVariables_5:Int64Array",
+        "type" : "Int64"
+      }, {
+        "name" : "5:StaticArrayVariables_5:LocalizedTextArray",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "5:StaticArrayVariables_5:QualifiedNameArray",
+        "type" : "QualifiedName"
+      }, {
+        "name" : "5:StaticArrayVariables_5:SByteArray",
+        "type" : "SByte"
+      }, {
+        "name" : "5:StaticArrayVariables_5:StringArray",
+        "type" : "Text"
+      }, {
+        "name" : "5:StaticArrayVariables_5:UInt16Array",
+        "type" : "UInt16"
+      }, {
+        "name" : "5:StaticArrayVariables_5:UInt32Array",
+        "type" : "UInt32"
+      }, {
+        "name" : "5:StaticArrayVariables_5:UInt64Array",
+        "type" : "UInt64"
+      }, {
+        "name" : "5:StaticArrayVariables_5:VariantArray",
+        "type" : ""
+      }, {
+        "name" : "5:StaticArrayVariables_5:XmlElementArray",
+        "type" : "XmlElement"
+      }, {
+        "name" : "5:StaticVariables_5:Boolean",
+        "type" : "Boolean"
+      }, {
+        "name" : "5:StaticVariables_5:Byte",
+        "type" : "Byte"
+      }, {
+        "name" : "5:StaticVariables_5:ByteString",
+        "type" : "Text"
+      }, {
+        "name" : "5:StaticVariables_5:DateTime",
+        "type" : "DateTime"
+      }, {
+        "name" : "5:StaticVariables_5:Double",
+        "type" : "Number"
+      }, {
+        "name" : "5:StaticVariables_5:Duration",
+        "type" : "Duration"
+      }, {
+        "name" : "5:StaticVariables_5:Enumeration",
+        "type" : "ServerState"
+      }, {
+        "name" : "5:StaticVariables_5:Float",
+        "type" : "Number"
+      }, {
+        "name" : "5:StaticVariables_5:GUID",
+        "type" : "Guid"
+      }, {
+        "name" : "5:StaticVariables_5:Image",
+        "type" : "Image"
+      }, {
+        "name" : "5:StaticVariables_5:ImageBMP",
+        "type" : "ImageBMP"
+      }, {
+        "name" : "5:StaticVariables_5:ImageGIF",
+        "type" : "ImageGIF"
+      }, {
+        "name" : "5:StaticVariables_5:ImageJPG",
+        "type" : "ImageJPG"
+      }, {
+        "name" : "5:StaticVariables_5:ImagePNG",
+        "type" : "ImagePNG"
+      }, {
+        "name" : "5:StaticVariables_5:Int16",
+        "type" : "Int16"
+      }, {
+        "name" : "5:StaticVariables_5:Int32",
+        "type" : "Int32"
+      }, {
+        "name" : "5:StaticVariables_5:Int64",
+        "type" : "Int64"
+      }, {
+        "name" : "5:StaticVariables_5:Integer",
+        "type" : "Integer"
+      }, {
+        "name" : "5:StaticVariables_5:LocaleId",
+        "type" : "LocaleId"
+      }, {
+        "name" : "5:StaticVariables_5:LocalizedText",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "5:StaticVariables_5:NodeId",
+        "type" : "NodeId"
+      }, {
+        "name" : "5:StaticVariables_5:Number",
+        "type" : "Number"
+      }, {
+        "name" : "5:StaticVariables_5:QualifiedName",
+        "type" : "QualifiedName"
+      }, {
+        "name" : "5:StaticVariables_5:SByte",
+        "type" : "SByte"
+      }, {
+        "name" : "5:StaticVariables_5:String",
+        "type" : "Text"
+      }, {
+        "name" : "5:StaticVariables_5:Time",
+        "type" : "Time"
+      }, {
+        "name" : "5:StaticVariables_5:UInt16",
+        "type" : "UInt16"
+      }, {
+        "name" : "5:StaticVariables_5:UInt32",
+        "type" : "UInt32"
+      }, {
+        "name" : "5:StaticVariables_5:UInt64",
+        "type" : "UInt64"
+      }, {
+        "name" : "5:StaticVariables_5:UInteger",
+        "type" : "Integer"
+      }, {
+        "name" : "5:StaticVariables_5:UtcTime",
+        "type" : "UtcTime"
+      }, {
+        "name" : "5:StaticVariables_5:Variant",
+        "type" : ""
+      }, {
+        "name" : "5:StaticVariables_5:XmlElement",
+        "type" : "XmlElement"
+      }, {
+        "name" : "5:TwoStateItems_5:TwoStateDiscreteItem",
+        "type" : "Boolean"
+      }, {
+        "name" : "5:TwoStateItems_5:TwoStateDiscreteItem_FalseState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "5:TwoStateItems_5:TwoStateDiscreteItem_TrueState",
+        "type" : "LocalizedText"
+      } ],
+      "lazy" : [ ],
+      "commands" : [ ]
+    },
+    "6:MyObjects" : {
+      "service" : "UA",
+      "subservice" : "/CarServer",
+      "active" : [ {
+        "name" : "6:MyDevice_6:MyLevel",
+        "type" : "Number"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_AckedState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_AckedState_FalseState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_AckedState_TrueState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_AckedState_Id",
+        "type" : "Boolean"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState_LimitState_CurrentState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState_FalseState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState_TrueState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState_Id",
+        "type" : "Boolean"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Comment",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Comment_SourceTimestamp",
+        "type" : "UtcTime"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EnabledState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EnabledState_FalseState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EnabledState_TrueState",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EnabledState_Id",
+        "type" : "Boolean"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_LastSeverity",
+        "type" : "UInt16"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_LastSeverity_SourceTimestamp",
+        "type" : "UtcTime"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Quality",
+        "type" : "StatusCode"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Quality_SourceTimestamp",
+        "type" : "UtcTime"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ConditionClassId",
+        "type" : "NodeId"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EventId",
+        "type" : "Text"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Time",
+        "type" : "UtcTime"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_SuppressedOrShelved",
+        "type" : "Boolean"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_LowLowLimit",
+        "type" : "Number"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EventType",
+        "type" : "NodeId"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_SourceNode",
+        "type" : "NodeId"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_HighHighLimit",
+        "type" : "Number"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_HighLimit",
+        "type" : "Number"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Severity",
+        "type" : "UInt16"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_InputNode",
+        "type" : "NodeId"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Retain",
+        "type" : "Boolean"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Message",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ClientUserId",
+        "type" : "Text"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_BranchId",
+        "type" : "NodeId"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ReceiveTime",
+        "type" : "UtcTime"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ConditionClassName",
+        "type" : "LocalizedText"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_SourceName",
+        "type" : "Text"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ConditionName",
+        "type" : "Text"
+      }, {
+        "name" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_LowLimit",
+        "type" : "Number"
+      }, {
+        "name" : "6:MyDevice_6:MySwitch",
+        "type" : "Boolean"
+      } ],
+      "lazy" : [ ],
+      "commands" : [ {
+        "name" : "6:MyDevice_6:MyMethod",
+        "type" : "command"
+      } ]
+    },
+    "3:Simulation" : {
+      "service" : "UA",
+      "subservice" : "/CarServer",
+      "active" : [ {
+        "name" : "3:Counter",
+        "type" : "Number"
+      }, {
+        "name" : "3:Random",
+        "type" : "Number"
+      }, {
+        "name" : "3:Sawtooth",
+        "type" : "Number"
+      }, {
+        "name" : "3:Sinusoid",
+        "type" : "Number"
+      }, {
+        "name" : "3:Square",
+        "type" : "Number"
+      }, {
+        "name" : "3:Triangle",
+        "type" : "Number"
+      } ],
+      "lazy" : [ ],
+      "commands" : [ ]
+    }
+  },
+  "browseServerOptions" : null,
+  "service" : "UA",
+  "subservice" : "/CarServer",
+  "providerUrl" : "http://iotage:4001",
+  "pollingExpiration" : "200000",
+  "pollingDaemonFrequency" : "20000",
+  "deviceRegistrationDuration" : "P1M",
+  "defaultType" : null,
+  "contexts" : [ {
+    "id" : "age01_3:Simulation",
+    "type" : "3:Simulation",
+    "service" : "UA",
+    "subservice" : "/CarServer",
+    "polling" : false,
+    "mappings" : [ {
+      "ocb_id" : "3:Counter",
+      "opcua_id" : "ns=3;i=1001",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "3:Random",
+      "opcua_id" : "ns=3;i=1002",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "3:Sawtooth",
+      "opcua_id" : "ns=3;i=1003",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "3:Sinusoid",
+      "opcua_id" : "ns=3;i=1004",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "3:Square",
+      "opcua_id" : "ns=3;i=1005",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "3:Triangle",
+      "opcua_id" : "ns=3;i=1006",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    } ]
+  }, {
+    "id" : "age01_5:StaticData",
+    "type" : "5:StaticData",
+    "service" : "UA",
+    "subservice" : "/CarServer",
+    "polling" : false,
+    "mappings" : [ {
+      "ocb_id" : "5:AccessLevels_5:AccessLevelCurrentRead",
+      "opcua_id" : "ns=5;s=AccessLevelCurrentRead",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AccessLevels_5:AccessLevelCurrentReadNotUser",
+      "opcua_id" : "ns=5;s=AccessLevelCurrentReadNotUser",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AccessLevels_5:AccessLevelCurrentReadWrite",
+      "opcua_id" : "ns=5;s=AccessLevelCurrentReadWrite",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AccessLevels_5:AccessLevelCurrentWrite",
+      "opcua_id" : "ns=5;s=AccessLevelCurrentWrite",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AccessLevels_5:AccessLevelCurrentWriteNotUser",
+      "opcua_id" : "ns=5;s=AccessLevelCurrentWriteNotUser",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:ByteAnalogItemArray",
+      "opcua_id" : "ns=5;s=ByteAnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:ByteAnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=ByteAnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:ByteAnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=ByteAnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:ByteAnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=ByteAnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:DoubleAnalogItemArray",
+      "opcua_id" : "ns=5;s=DoubleAnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:DoubleAnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=DoubleAnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:DoubleAnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=DoubleAnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:DoubleAnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=DoubleAnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:FloatAnalogItemArray",
+      "opcua_id" : "ns=5;s=FloatAnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:FloatAnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=FloatAnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:FloatAnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=FloatAnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:FloatAnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=FloatAnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int16AnalogItemArray",
+      "opcua_id" : "ns=5;s=Int16AnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int16AnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=Int16AnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int16AnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=Int16AnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int16AnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=Int16AnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int32AnalogItemArray",
+      "opcua_id" : "ns=5;s=Int32AnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int32AnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=Int32AnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int32AnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=Int32AnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int32AnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=Int32AnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int64AnalogItemArray",
+      "opcua_id" : "ns=5;s=Int64AnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int64AnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=Int64AnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int64AnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=Int64AnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:Int64AnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=Int64AnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:SByteAnalogItemArray",
+      "opcua_id" : "ns=5;s=SByteAnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:SByteAnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=SByteAnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:SByteAnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=SByteAnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:SByteAnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=SByteAnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt16AnalogItemArray",
+      "opcua_id" : "ns=5;s=UInt16AnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt16AnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=UInt16AnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt16AnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=UInt16AnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt16AnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=UInt16AnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt32AnalogItemArray",
+      "opcua_id" : "ns=5;s=UInt32AnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt32AnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=UInt32AnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt32AnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=UInt32AnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt32AnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=UInt32AnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt64AnalogItemArray",
+      "opcua_id" : "ns=5;s=UInt64AnalogItemArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt64AnalogItemArray_Definition",
+      "opcua_id" : "ns=5;s=UInt64AnalogItemArray/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt64AnalogItemArray_EngineeringUnits",
+      "opcua_id" : "ns=5;s=UInt64AnalogItemArray/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItemArrays_5:UInt64AnalogItemArray_EURange",
+      "opcua_id" : "ns=5;s=UInt64AnalogItemArray/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:ByteAnalogItem",
+      "opcua_id" : "ns=5;s=ByteAnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:ByteAnalogItem_Definition",
+      "opcua_id" : "ns=5;s=ByteAnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:ByteAnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=ByteAnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:ByteAnalogItem_EURange",
+      "opcua_id" : "ns=5;s=ByteAnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:DoubleAnalogItem",
+      "opcua_id" : "ns=5;s=DoubleAnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:DoubleAnalogItem_Definition",
+      "opcua_id" : "ns=5;s=DoubleAnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:DoubleAnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=DoubleAnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:DoubleAnalogItem_EURange",
+      "opcua_id" : "ns=5;s=DoubleAnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:FloatAnalogItem",
+      "opcua_id" : "ns=5;s=FloatAnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:FloatAnalogItem_Definition",
+      "opcua_id" : "ns=5;s=FloatAnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:FloatAnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=FloatAnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:FloatAnalogItem_EURange",
+      "opcua_id" : "ns=5;s=FloatAnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int16AnalogItem",
+      "opcua_id" : "ns=5;s=Int16AnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int16AnalogItem_Definition",
+      "opcua_id" : "ns=5;s=Int16AnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int16AnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=Int16AnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int16AnalogItem_EURange",
+      "opcua_id" : "ns=5;s=Int16AnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int32AnalogItem",
+      "opcua_id" : "ns=5;s=Int32AnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int32AnalogItem_Definition",
+      "opcua_id" : "ns=5;s=Int32AnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int32AnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=Int32AnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int32AnalogItem_EURange",
+      "opcua_id" : "ns=5;s=Int32AnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int64AnalogItem",
+      "opcua_id" : "ns=5;s=Int64AnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int64AnalogItem_Definition",
+      "opcua_id" : "ns=5;s=Int64AnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int64AnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=Int64AnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Int64AnalogItem_EURange",
+      "opcua_id" : "ns=5;s=Int64AnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:SByteAnalogItem",
+      "opcua_id" : "ns=5;s=SByteAnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:SByteAnalogItem_Definition",
+      "opcua_id" : "ns=5;s=SByteAnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:SByteAnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=SByteAnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:SByteAnalogItem_EURange",
+      "opcua_id" : "ns=5;s=SByteAnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem",
+      "opcua_id" : "ns=5;s=Sample Instrument Int32AnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem_Definition",
+      "opcua_id" : "ns=5;s=Sample Instrument Int32AnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem_InstrumentRange",
+      "opcua_id" : "ns=5;s=Sample Instrument Int32AnalogItem/0:InstrumentRange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=Sample Instrument Int32AnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:Sample Instrument Int32AnalogItem_EURange",
+      "opcua_id" : "ns=5;s=Sample Instrument Int32AnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt16AnalogItem",
+      "opcua_id" : "ns=5;s=UInt16AnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt16AnalogItem_Definition",
+      "opcua_id" : "ns=5;s=UInt16AnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt16AnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=UInt16AnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt16AnalogItem_EURange",
+      "opcua_id" : "ns=5;s=UInt16AnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt32AnalogItem",
+      "opcua_id" : "ns=5;s=UInt32AnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt32AnalogItem_Definition",
+      "opcua_id" : "ns=5;s=UInt32AnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt32AnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=UInt32AnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt32AnalogItem_EURange",
+      "opcua_id" : "ns=5;s=UInt32AnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt64AnalogItem",
+      "opcua_id" : "ns=5;s=UInt64AnalogItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt64AnalogItem_Definition",
+      "opcua_id" : "ns=5;s=UInt64AnalogItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt64AnalogItem_EngineeringUnits",
+      "opcua_id" : "ns=5;s=UInt64AnalogItem/0:EngineeringUnits",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:AnalogItems_5:UInt64AnalogItem_EURange",
+      "opcua_id" : "ns=5;s=UInt64AnalogItem/0:EURange",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:BooleanDataItem",
+      "opcua_id" : "ns=5;s=BooleanDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:BooleanDataItem_Definition",
+      "opcua_id" : "ns=5;s=BooleanDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:ByteDataItem",
+      "opcua_id" : "ns=5;s=ByteDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:ByteDataItem_Definition",
+      "opcua_id" : "ns=5;s=ByteDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:ByteStringDataItem",
+      "opcua_id" : "ns=5;s=ByteStringDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:ByteStringDataItem_Definition",
+      "opcua_id" : "ns=5;s=ByteStringDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:DateTimeDataItem",
+      "opcua_id" : "ns=5;s=DateTimeDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:DateTimeDataItem_Definition",
+      "opcua_id" : "ns=5;s=DateTimeDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:DoubleDataItem",
+      "opcua_id" : "ns=5;s=DoubleDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:DoubleDataItem_Definition",
+      "opcua_id" : "ns=5;s=DoubleDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:FloatDataItem",
+      "opcua_id" : "ns=5;s=FloatDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:FloatDataItem_Definition",
+      "opcua_id" : "ns=5;s=FloatDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:GUIDDataItem",
+      "opcua_id" : "ns=5;s=GUIDDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:GUIDDataItem_Definition",
+      "opcua_id" : "ns=5;s=GUIDDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:Int16DataItem",
+      "opcua_id" : "ns=5;s=Int16DataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:Int16DataItem_Definition",
+      "opcua_id" : "ns=5;s=Int16DataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:Int32DataItem",
+      "opcua_id" : "ns=5;s=Int32DataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:Int32DataItem_Definition",
+      "opcua_id" : "ns=5;s=Int32DataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:Int64DataItem",
+      "opcua_id" : "ns=5;s=Int64DataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:Int64DataItem_Definition",
+      "opcua_id" : "ns=5;s=Int64DataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:SByteDataItem",
+      "opcua_id" : "ns=5;s=SByteDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:SByteDataItem_Definition",
+      "opcua_id" : "ns=5;s=SByteDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:StringDataItem",
+      "opcua_id" : "ns=5;s=StringDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:StringDataItem_Definition",
+      "opcua_id" : "ns=5;s=StringDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:UInt16DataItem",
+      "opcua_id" : "ns=5;s=UInt16DataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:UInt16DataItem_Definition",
+      "opcua_id" : "ns=5;s=UInt16DataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:UInt32DataItem",
+      "opcua_id" : "ns=5;s=UInt32DataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:UInt32DataItem_Definition",
+      "opcua_id" : "ns=5;s=UInt32DataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:UInt64DataItem",
+      "opcua_id" : "ns=5;s=UInt64DataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:UInt64DataItem_Definition",
+      "opcua_id" : "ns=5;s=UInt64DataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:XmlElementDataItem",
+      "opcua_id" : "ns=5;s=XmlElementDataItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:DataItems_5:XmlElementDataItem_Definition",
+      "opcua_id" : "ns=5;s=XmlElementDataItem/0:Definition",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:MultiStateItems_5:MultiStateDiscreteItem",
+      "opcua_id" : "ns=5;s=MultiStateDiscreteItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:MultiStateItems_5:MultiStateDiscreteItem_EnumStrings",
+      "opcua_id" : "ns=5;s=MultiStateDiscreteItem/0:EnumStrings",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:BooleanArray",
+      "opcua_id" : "ns=5;s=BooleanArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:ByteArray",
+      "opcua_id" : "ns=5;s=ByteArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:ByteStringArray",
+      "opcua_id" : "ns=5;s=ByteStringArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:DateTimeArray",
+      "opcua_id" : "ns=5;s=DateTimeArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:DoubleArray",
+      "opcua_id" : "ns=5;s=DoubleArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:FloatArray",
+      "opcua_id" : "ns=5;s=FloatArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:GUIDArrayArray",
+      "opcua_id" : "ns=5;s=GUIDArrayArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:Int16Array",
+      "opcua_id" : "ns=5;s=Int16Array",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:Int32Array",
+      "opcua_id" : "ns=5;s=Int32Array",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:Int64Array",
+      "opcua_id" : "ns=5;s=Int64Array",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:LocalizedTextArray",
+      "opcua_id" : "ns=5;s=LocalizedTextArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:QualifiedNameArray",
+      "opcua_id" : "ns=5;s=QualifiedNameArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:SByteArray",
+      "opcua_id" : "ns=5;s=SByteArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:StringArray",
+      "opcua_id" : "ns=5;s=StringArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:UInt16Array",
+      "opcua_id" : "ns=5;s=UInt16Array",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:UInt32Array",
+      "opcua_id" : "ns=5;s=UInt32Array",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:UInt64Array",
+      "opcua_id" : "ns=5;s=UInt64Array",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:VariantArray",
+      "opcua_id" : "ns=5;s=VariantArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticArrayVariables_5:XmlElementArray",
+      "opcua_id" : "ns=5;s=XmlElementArray",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Boolean",
+      "opcua_id" : "ns=5;s=Boolean",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Byte",
+      "opcua_id" : "ns=5;s=Byte",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:ByteString",
+      "opcua_id" : "ns=5;s=ByteString",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:DateTime",
+      "opcua_id" : "ns=5;s=DateTime",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Double",
+      "opcua_id" : "ns=5;s=Double",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Duration",
+      "opcua_id" : "ns=5;s=Duration",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Enumeration",
+      "opcua_id" : "ns=5;s=Enumeration",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Float",
+      "opcua_id" : "ns=5;s=Float",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:GUID",
+      "opcua_id" : "ns=5;s=GUID",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Image",
+      "opcua_id" : "ns=5;s=Image",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:ImageBMP",
+      "opcua_id" : "ns=5;s=ImageBMP",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:ImageGIF",
+      "opcua_id" : "ns=5;s=ImageGIF",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:ImageJPG",
+      "opcua_id" : "ns=5;s=ImageJPG",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:ImagePNG",
+      "opcua_id" : "ns=5;s=ImagePNG",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Int16",
+      "opcua_id" : "ns=5;s=Int16",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Int32",
+      "opcua_id" : "ns=5;s=Int32",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Int64",
+      "opcua_id" : "ns=5;s=Int64",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Integer",
+      "opcua_id" : "ns=5;s=Integer",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:LocaleId",
+      "opcua_id" : "ns=5;s=LocaleId",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:LocalizedText",
+      "opcua_id" : "ns=5;s=LocalizedText",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:NodeId",
+      "opcua_id" : "ns=5;s=NodeId",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Number",
+      "opcua_id" : "ns=5;s=Number",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:QualifiedName",
+      "opcua_id" : "ns=5;s=QualifiedName",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:SByte",
+      "opcua_id" : "ns=5;s=SByte",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:String",
+      "opcua_id" : "ns=5;s=String",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Time",
+      "opcua_id" : "ns=5;s=Time",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:UInt16",
+      "opcua_id" : "ns=5;s=UInt16",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:UInt32",
+      "opcua_id" : "ns=5;s=UInt32",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:UInt64",
+      "opcua_id" : "ns=5;s=UInt64",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:UInteger",
+      "opcua_id" : "ns=5;s=UInteger",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:UtcTime",
+      "opcua_id" : "ns=5;s=UtcTime",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:Variant",
+      "opcua_id" : "ns=5;s=Variant",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:StaticVariables_5:XmlElement",
+      "opcua_id" : "ns=5;s=XmlElement",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:TwoStateItems_5:TwoStateDiscreteItem",
+      "opcua_id" : "ns=5;s=TwoStateDiscreteItem",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:TwoStateItems_5:TwoStateDiscreteItem_FalseState",
+      "opcua_id" : "ns=5;s=TwoStateDiscreteItem/0:FalseState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "5:TwoStateItems_5:TwoStateDiscreteItem_TrueState",
+      "opcua_id" : "ns=5;s=TwoStateDiscreteItem/0:TrueState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    } ]
+  }, {
+    "id" : "age01_6:MyObjects",
+    "type" : "6:MyObjects",
+    "service" : "UA",
+    "subservice" : "/CarServer",
+    "polling" : false,
+    "mappings" : [ {
+      "ocb_id" : "6:MyDevice_6:MyLevel",
+      "opcua_id" : "ns=6;s=MyLevel",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_AckedState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:AckedState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_AckedState_FalseState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:AckedState/0:FalseState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_AckedState_TrueState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:AckedState/0:TrueState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_AckedState_Id",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:AckedState/0:Id",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:ActiveState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState_LimitState_CurrentState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:LimitState/0:CurrentState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState_FalseState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:ActiveState/0:FalseState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState_TrueState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:ActiveState/0:TrueState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ActiveState_Id",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:ActiveState/0:Id",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Comment",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:Comment",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Comment_SourceTimestamp",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:Comment/0:SourceTimestamp",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EnabledState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:EnabledState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EnabledState_FalseState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:EnabledState/0:FalseState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EnabledState_TrueState",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:EnabledState/0:TrueState",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EnabledState_Id",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:EnabledState/0:Id",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_LastSeverity",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:LastSeverity",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_LastSeverity_SourceTimestamp",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:LastSeverity/0:SourceTimestamp",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Quality",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:Quality",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Quality_SourceTimestamp",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:Quality/0:SourceTimestamp",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ConditionClassId",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:ConditionClassId",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EventId",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:EventId",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Time",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:Time",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_SuppressedOrShelved",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:SuppressedOrShelved",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_LowLowLimit",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:LowLowLimit",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_EventType",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:EventType",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_SourceNode",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:SourceNode",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_HighHighLimit",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:HighHighLimit",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_HighLimit",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:HighLimit",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Severity",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:Severity",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_InputNode",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:InputNode",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Retain",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:Retain",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_Message",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:Message",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ClientUserId",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:ClientUserId",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_BranchId",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:BranchId",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ReceiveTime",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:ReceiveTime",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ConditionClassName",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:ConditionClassName",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_SourceName",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:SourceName",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_ConditionName",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:ConditionName",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MyLevel_6:MyLevelAlarm_LowLimit",
+      "opcua_id" : "ns=6;s=MyLevel.Alarm/0:LowLimit",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    }, {
+      "ocb_id" : "6:MyDevice_6:MySwitch",
+      "opcua_id" : "ns=6;s=MySwitch",
+      "object_id" : null,
+      "inputArguments" : [ ]
+    } ]
+  } ],
+  "contextSubscriptions" : [ {
+    "id" : "age01_6:MyObjects",
+    "type" : "6:MyObjects",
+    "mappings" : [ {
+      "ocb_id" : "6:MyDevice_6:MyMethod",
+      "opcua_id" : "ns=6;s=MyMethod",
+      "object_id" : "ns=6;s=MyDevice",
+      "inputArguments" : [ {
+        "dataType" : 12,
+        "type" : "Operation"
+      }, {
+        "dataType" : 11,
+        "type" : "Parameter"
+      } ]
+    } ]
+  } ]
 }
