@@ -14,14 +14,17 @@ services:
       - "4001:4001"
       - "4081:8080"
     extra_hosts:
-      - "iotcarsrv:192.168.40.42"
-      - "pietro-deb.pietro.local:192.168.40.42"
+      - "iotcarsrv:192.168.50.167"
+      - "HP:192.168.50.167"
     depends_on:
       - iotmongo
       - orion
     volumes:
       - ./AGECONF:/opt/iotagent-opcua/conf
+      - ./certificates:/opt/iotagent-opcua/certificates
     command: /usr/bin/tail -f /var/log/lastlog
+    environment:
+      - IOTA_CB_NGSI_VERSION=v2
 
   iotmongo:
     hostname: iotmongo
@@ -69,3 +72,4 @@ networks:
   hostnet:
   iotnet:
   ocbnet:
+
